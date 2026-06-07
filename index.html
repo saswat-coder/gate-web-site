@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GATE – Gandhi Academy of Technology and Engineering</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --blue:#0064e0;--blue-deep:#0457cb;--blue-soft:#0091ff;
+  --ink:#1c1e21;--ink-deep:#0a1317;--charcoal:#444950;
+  --slate:#4b4c4f;--steel:#5d6c7b;--stone:#8595a4;
+  --canvas:#ffffff;--soft:#f1f4f7;--hairline:#ced0d4;--hairline-soft:#dee3e9;
+  --success:#31a24c;--warn:#f2a918;--critical:#e41e3f;
+  --r-full:100px;--r-xxxl:32px;--r-xxl:24px;--r-xl:16px;--r-lg:8px;
+  --font:'Montserrat',Helvetica,Arial,sans-serif;
+  --nav-h:64px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);font-size:16px;line-height:1.5;color:var(--ink);background:var(--canvas);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;object-fit:cover;}
+button{font-family:var(--font);cursor:pointer;border:none;outline:none;}
+input,select,textarea{font-family:var(--font);}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-thumb{background:var(--hairline);border-radius:3px;}
+
+/* PROMO BANNER */
+.promo-banner{background:var(--ink-deep);color:#fff;font-size:13px;font-weight:700;padding:10px 24px;text-align:center;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.promo-banner a{color:var(--blue-soft);}
+.close-banner{background:none;color:rgba(255,255,255,.5);font-size:20px;cursor:pointer;border:none;padding:0 6px;margin-left:auto;}
+
+/* GLOBAL NAV */
+.gn{position:sticky;top:0;z-index:900;background:rgba(255,255,255,.96);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--hairline-soft);height:var(--nav-h);}
+.gn-inner{max-width:1280px;margin:0 auto;height:100%;display:flex;align-items:center;gap:16px;padding:0 32px;}
+.gn-logo{font-size:16px;font-weight:800;color:var(--ink-deep);letter-spacing:-0.5px;white-space:nowrap;flex-shrink:0;}
+.gn-logo span{color:var(--blue);}
+.gn-tabs{display:flex;align-items:center;gap:6px;flex:1;justify-content:center;}
+.gn-tab{background:var(--canvas);color:var(--ink);border:1px solid var(--hairline);border-radius:var(--r-full);padding:7px 15px;font-size:13px;font-weight:700;cursor:pointer;position:relative;transition:all .15s;white-space:nowrap;}
+.gn-tab:hover{border-color:var(--charcoal);}
+.gn-drop{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-xl);padding:8px 0;min-width:220px;box-shadow:0 8px 32px rgba(10,19,23,.12);z-index:999;}
+.gn-tab:hover>.gn-drop{display:block;}
+.gn-drop a{display:block;color:var(--charcoal);font-size:13px;font-weight:600;padding:9px 20px;transition:all .15s;}
+.gn-drop a:hover{background:var(--soft);color:var(--blue);}
+.gn-actions{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.gn-search{background:var(--soft);color:var(--steel);border:none;border-radius:var(--r-full);padding:8px 18px;font-size:13px;height:40px;display:flex;align-items:center;gap:6px;}
+.btn-black{background:var(--ink-deep);color:#fff;border-radius:var(--r-full);padding:10px 22px;font-size:13px;font-weight:700;transition:all .15s;display:inline-block;}
+.btn-black:hover{background:var(--charcoal);}
+.btn-black:active{transform:scale(.95);}
+.btn-blue{background:var(--blue);color:#fff;border-radius:var(--r-full);padding:10px 22px;font-size:13px;font-weight:700;transition:all .15s;display:inline-block;}
+.btn-blue:hover{background:var(--blue-deep);}
+.btn-blue:active{transform:scale(.95);}
+.btn-outline{background:transparent;color:var(--ink-deep);border:2px solid var(--ink-deep);border-radius:var(--r-full);padding:9px 22px;font-size:13px;font-weight:700;transition:all .15s;display:inline-block;}
+.btn-outline:hover{background:rgba(10,19,23,.05);}
+.btn-outline-w{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);border-radius:var(--r-full);padding:10px 22px;font-size:13px;font-weight:700;transition:all .15s;display:inline-block;}
+.btn-outline-w:hover{background:rgba(255,255,255,.1);border-color:#fff;}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;padding:4px;cursor:pointer;}
+.hamburger span{width:22px;height:2px;background:var(--ink-deep);border-radius:2px;transition:all .3s;}
+
+/* DRAWER */
+.drawer-mask{display:none;position:fixed;inset:0;background:rgba(10,19,23,.5);z-index:1900;backdrop-filter:blur(4px);}
+.drawer{position:absolute;top:0;right:0;width:min(340px,90vw);height:100%;background:var(--canvas);overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:2px;}
+.drawer-close{align-self:flex-end;width:36px;height:36px;border-radius:50%;background:var(--soft);color:var(--ink-deep);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-bottom:12px;border:none;}
+.drawer-link{display:block;color:var(--charcoal);font-size:15px;font-weight:600;padding:12px 16px;border-radius:var(--r-lg);transition:background .15s;}
+.drawer-link:hover{background:var(--soft);}
+.drawer-sec{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--stone);padding:14px 16px 6px;}
+
+/* HERO */
+.hero{position:relative;width:100%;height:88vh;min-height:500px;overflow:hidden;background:#0a1317;}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;display:flex;align-items:flex-end;padding-bottom:80px;justify-content:center;}
+.slide.active{opacity:1;}
+.slide-bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);transition:transform 8s ease;}
+.slide.active .slide-bg{transform:scale(1);}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,19,23,.8) 0%,rgba(10,19,23,.2) 60%,transparent 100%);}
+.slide-content{position:relative;z-index:2;text-align:center;color:#fff;padding:0 24px;max-width:880px;}
+.slide-eye{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue-soft);margin-bottom:12px;opacity:0;transform:translateY(16px);transition:all .7s ease .2s;}
+.slide.active .slide-eye{opacity:1;transform:translateY(0);}
+.slide-h{font-size:clamp(32px,5.5vw,64px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:14px;opacity:0;transform:translateY(20px);transition:all .7s ease .35s;}
+.slide.active .slide-h{opacity:1;transform:translateY(0);}
+.slide-sub{font-size:clamp(15px,2vw,20px);font-weight:400;color:rgba(255,255,255,.75);margin-bottom:28px;opacity:0;transform:translateY(14px);transition:all .7s ease .5s;}
+.slide.active .slide-sub{opacity:1;transform:translateY(0);}
+.slide-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;opacity:0;transform:translateY(10px);transition:all .7s ease .65s;}
+.slide.active .slide-ctas{opacity:1;transform:translateY(0);}
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:10;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;}
+.hero-arrow:hover{background:rgba(255,255,255,.28);}
+.hero-arrow.prev{left:20px;}.hero-arrow.next{right:20px;}
+.hero-dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:7px;}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:all .25s;}
+.hero-dot.active{background:#fff;transform:scale(1.5);}
+
+/* SECTIONS */
+.section{width:100%;padding:80px 32px;}
+.sec-inner{max-width:1200px;margin:0 auto;}
+.sec-eye{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.sec-h{font-size:clamp(28px,3.5vw,48px);font-weight:800;letter-spacing:-1px;line-height:1.1;color:var(--ink-deep);margin-bottom:12px;}
+.sec-sub{font-size:17px;font-weight:400;color:var(--steel);margin-bottom:32px;max-width:600px;}
+.section.bg-soft{background:var(--soft);}
+.center{text-align:center;}.center .sec-sub{margin-left:auto;margin-right:auto;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.about-img{border-radius:var(--r-xxxl);overflow:hidden;aspect-ratio:4/3;background:var(--soft);}
+.about-img img{width:100%;height:100%;}
+.about-text p{font-size:16px;color:var(--charcoal);line-height:1.7;margin-bottom:14px;}
+.about-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--hairline-soft);border-radius:var(--r-xxxl);overflow:hidden;background:var(--canvas);margin-top:48px;}
+.stat-cell{padding:44px 24px;text-align:center;border-right:1px solid var(--hairline-soft);}
+.stat-cell:last-child{border-right:none;}
+.stat-n{font-size:52px;font-weight:800;color:var(--blue);letter-spacing:-2px;line-height:1;}
+.stat-l{font-size:13px;font-weight:600;color:var(--steel);margin-top:8px;}
+
+/* COURSES */
+.courses-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+.course-card{background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-xxxl);padding:32px 28px;transition:transform .2s,box-shadow .2s;}
+.course-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(10,19,23,.08);}
+.c-icon{width:52px;height:52px;border-radius:var(--r-xl);background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;}
+.c-name{font-size:20px;font-weight:800;color:var(--ink-deep);margin-bottom:6px;letter-spacing:-0.4px;}
+.c-seats{font-size:12px;font-weight:700;color:var(--stone);margin-bottom:16px;text-transform:uppercase;letter-spacing:.5px;}
+.c-list{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.c-list li{font-size:13px;color:var(--charcoal);padding:5px 0;border-bottom:1px solid var(--hairline-soft);display:flex;align-items:center;gap:8px;}
+.c-list li::before{content:"›";color:var(--blue);font-weight:700;flex-shrink:0;}
+
+/* NEWS */
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+.news-card{background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-xxxl);overflow:hidden;transition:transform .2s,box-shadow .2s;}
+.news-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(10,19,23,.08);}
+.news-body{padding:28px;}
+.badge{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:4px 10px;border-radius:var(--r-full);display:inline-block;margin-bottom:12px;}
+.badge-blue{background:var(--blue);color:#fff;}
+.badge-warn{background:var(--warn);color:var(--ink-deep);}
+.badge-success{background:var(--success);color:#fff;}
+.news-title{font-size:15px;font-weight:700;color:var(--ink-deep);line-height:1.4;margin-bottom:16px;}
+.news-date{font-size:12px;color:var(--stone);margin-bottom:8px;font-weight:600;}
+.news-link{font-size:14px;font-weight:700;color:var(--blue);}
+.news-link::after{content:" →";}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px;}
+.why-tile{background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-xl);padding:28px 24px;}
+.why-icon{font-size:28px;margin-bottom:14px;}
+.why-title{font-size:16px;font-weight:700;color:var(--ink-deep);margin-bottom:8px;}
+.why-desc{font-size:13px;color:var(--steel);line-height:1.6;}
+
+/* TESTIMONIALS */
+.testi-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-top:48px;padding-bottom:4px;}
+.testi-track::-webkit-scrollbar{display:none;}
+.testi-card{min-width:300px;flex-shrink:0;scroll-snap-align:start;background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-xl);padding:28px;}
+.testi-q{font-size:14px;color:var(--charcoal);line-height:1.6;margin-bottom:20px;font-style:italic;}
+.testi-q::before{content:"\201C";font-size:22px;color:var(--blue);font-style:normal;line-height:0;vertical-align:-7px;margin-right:2px;}
+.testi-author{display:flex;align-items:center;gap:12px;}
+.testi-av{width:40px;height:40px;border-radius:50%;background:var(--soft);border:1px solid var(--hairline-soft);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--steel);flex-shrink:0;}
+.testi-av img{width:100%;height:100%;object-fit:cover;}
+.testi-name{font-size:13px;font-weight:700;color:var(--ink-deep);}
+.testi-role{font-size:12px;color:var(--stone);}
+
+/* GALLERY */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:48px;}
+.gallery-item{aspect-ratio:1;border-radius:var(--r-xxl);overflow:hidden;background:var(--soft);cursor:pointer;position:relative;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+.gallery-item:hover img{transform:scale(1.06);}
+.gallery-ov{position:absolute;inset:0;background:rgba(10,19,23,.45);opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;}
+.gallery-item:hover .gallery-ov{opacity:1;}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(10,19,23,.92);z-index:2000;align-items:center;justify-content:center;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:90vw;max-height:90vh;border-radius:var(--r-xxl);object-fit:contain;}
+.lb-close{position:absolute;top:20px;right:24px;color:#fff;font-size:32px;cursor:pointer;background:none;border:none;}
+
+/* FAQ */
+.faq-stack{display:flex;flex-direction:column;gap:10px;margin-top:40px;}
+.faq-item{background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-xl);overflow:hidden;}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;font-size:15px;font-weight:700;color:var(--ink-deep);user-select:none;}
+.faq-chevron{font-size:18px;color:var(--steel);transition:transform .3s;flex-shrink:0;}
+.faq-item.open .faq-chevron{transform:rotate(180deg);}
+.faq-a{display:none;padding:0 24px 20px;font-size:14px;color:var(--charcoal);line-height:1.6;}
+.faq-item.open .faq-a{display:block;}
+
+/* DOWNLOADS */
+.dl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px;}
+.dl-card{background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-xl);padding:20px 22px;display:flex;align-items:center;gap:14px;transition:all .15s;}
+.dl-card:hover{background:var(--soft);transform:translateY(-2px);}
+.dl-icon{width:42px;height:42px;border-radius:var(--r-lg);background:rgba(0,100,224,.1);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.dl-title{font-size:13px;font-weight:700;color:var(--ink-deep);margin-bottom:2px;}
+.dl-size{font-size:11px;color:var(--stone);}
+
+/* ENQUIRY */
+.enquiry-card{background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-xxxl);padding:48px 40px;max-width:680px;margin:0 auto;box-shadow:rgba(20,22,26,.1) 0 1px 4px 0;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.f-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.f-field label{font-size:12px;font-weight:700;color:var(--charcoal);letter-spacing:.3px;text-transform:uppercase;}
+.f-field input,.f-field select,.f-field textarea{background:var(--canvas);color:var(--ink);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:11px 14px;font-size:15px;height:44px;outline:none;transition:border .15s,box-shadow .15s;-webkit-appearance:none;}
+.f-field textarea{height:auto;resize:vertical;}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{border:2px solid #1876f2;box-shadow:0 0 0 3px rgba(24,118,242,.1);}
+.form-submit{background:var(--blue);color:#fff;border-radius:var(--r-full);padding:14px 40px;font-size:15px;font-weight:700;border:none;cursor:pointer;width:100%;margin-top:6px;transition:all .15s;}
+.form-submit:hover{background:var(--blue-deep);}
+
+/* MAP */
+.map-wrap{width:100%;height:380px;border-radius:var(--r-xxxl);overflow:hidden;border:1px solid var(--hairline-soft);margin-top:48px;}
+.map-wrap iframe{width:100%;height:100%;border:none;}
+
+/* FOOTER */
+.footer{background:var(--canvas);border-top:1px solid var(--hairline-soft);padding:64px 32px 32px;}
+.footer-inner{max-width:1280px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.footer-brand-name{font-size:17px;font-weight:800;color:var(--ink-deep);margin-bottom:12px;}
+.footer-brand-name span{color:var(--blue);}
+.footer-brand p{font-size:13px;color:var(--steel);line-height:1.7;margin-bottom:10px;}
+.footer-col h4{font-size:13px;font-weight:700;color:var(--ink-deep);margin-bottom:14px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:8px;}
+.footer-col ul li a{font-size:13px;color:var(--steel);transition:color .15s;}
+.footer-col ul li a:hover{color:var(--blue);}
+.fc-item{font-size:13px;color:var(--steel);margin-bottom:8px;display:flex;align-items:flex-start;gap:8px;}
+.fc-item a{color:var(--blue);}
+.footer-bottom{border-top:1px solid var(--hairline-soft);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:var(--stone);}
+.footer-social{display:flex;gap:10px;}
+.social-btn{width:34px;height:34px;border-radius:50%;background:var(--soft);color:var(--steel);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.social-btn:hover{background:var(--blue);color:#fff;}
+
+/* STICKY BAR */
+.sticky-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-top:1px solid var(--hairline-soft);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;z-index:800;transform:translateY(100%);transition:transform .4s ease;box-shadow:rgba(20,22,26,.12) 0 -2px 16px;}
+.sticky-bar.visible{transform:translateY(0);}
+.sticky-bar-t{font-size:15px;font-weight:700;color:var(--ink-deep);}
+.sticky-bar-s{font-size:12px;color:var(--steel);}
+
+/* FADE UP */
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* ─── ADMIN LOGIN MODAL ─── */
+.admin-overlay{display:none;position:fixed;inset:0;z-index:3000;background:rgba(10,19,23,.7);backdrop-filter:blur(4px);}
+.admin-overlay.open{display:flex;align-items:center;justify-content:center;}
+.admin-modal{background:var(--canvas);border-radius:var(--r-xxxl);padding:48px 40px;width:min(440px,92vw);box-shadow:0 24px 64px rgba(10,19,23,.25);}
+.admin-modal h2{font-size:22px;font-weight:800;color:var(--ink-deep);margin-bottom:6px;}
+.admin-modal p{font-size:14px;color:var(--steel);margin-bottom:28px;}
+.admin-err{font-size:13px;color:var(--critical);margin-top:10px;display:none;}
+
+/* ─── ADMIN PANEL ─── */
+.admin-panel{display:none;position:fixed;inset:0;z-index:3000;background:var(--soft);overflow-y:auto;}
+.admin-panel.open{display:block;}
+.ap-nav{background:var(--ink-deep);color:#fff;padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.ap-nav-logo{font-size:14px;font-weight:800;letter-spacing:-0.3px;}
+.ap-nav-logo span{color:var(--blue-soft);}
+.ap-nav-actions{display:flex;align-items:center;gap:12px;}
+.ap-nav-btn{background:rgba(255,255,255,.1);color:#fff;border:none;border-radius:var(--r-full);padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s;}
+.ap-nav-btn:hover{background:rgba(255,255,255,.2);}
+.ap-body{display:flex;min-height:calc(100vh - 60px);}
+.ap-sidebar{width:240px;flex-shrink:0;background:var(--canvas);border-right:1px solid var(--hairline-soft);padding:24px 16px;}
+.ap-sidebar h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--stone);padding:10px 12px 6px;}
+.ap-link{display:flex;align-items:center;gap:10px;color:var(--charcoal);font-size:14px;font-weight:600;padding:10px 12px;border-radius:var(--r-lg);cursor:pointer;transition:all .15s;margin-bottom:2px;background:none;border:none;width:100%;text-align:left;}
+.ap-link:hover{background:var(--soft);color:var(--blue);}
+.ap-link.active{background:rgba(0,100,224,.08);color:var(--blue);}
+.ap-link .ic{font-size:17px;flex-shrink:0;}
+.ap-content{flex:1;padding:32px;min-width:0;}
+.ap-tab{display:none;}
+.ap-tab.active{display:block;}
+.ap-page-title{font-size:22px;font-weight:800;color:var(--ink-deep);margin-bottom:6px;}
+.ap-page-sub{font-size:14px;color:var(--steel);margin-bottom:28px;}
+.ap-card{background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-xl);padding:24px;margin-bottom:16px;}
+.ap-card-title{font-size:14px;font-weight:700;color:var(--ink-deep);margin-bottom:16px;}
+.ap-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.ap-field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.ap-field label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--charcoal);}
+.ap-field input,.ap-field select,.ap-field textarea{background:var(--canvas);color:var(--ink);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:9px 13px;font-size:14px;outline:none;transition:border .15s;}
+.ap-field input:focus,.ap-field select:focus,.ap-field textarea:focus{border:2px solid var(--blue);}
+.ap-field textarea{height:90px;resize:vertical;}
+.ap-btn{background:var(--blue);color:#fff;border-radius:var(--r-full);padding:10px 22px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .15s;}
+.ap-btn:hover{background:var(--blue-deep);}
+.ap-btn:active{transform:scale(.95);}
+.ap-btn.secondary{background:transparent;color:var(--blue);border:2px solid var(--blue);}
+.ap-btn.danger{background:var(--critical);color:#fff;}
+.ap-success{font-size:13px;color:var(--success);margin-top:8px;display:none;}
+.ap-table{width:100%;border-collapse:collapse;}
+.ap-table th{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--stone);padding:10px 14px;text-align:left;border-bottom:2px solid var(--hairline-soft);}
+.ap-table td{font-size:13px;color:var(--charcoal);padding:12px 14px;border-bottom:1px solid var(--hairline-soft);vertical-align:middle;}
+.ap-table tr:last-child td{border-bottom:none;}
+.ap-table tr:hover td{background:var(--soft);}
+.ap-del{background:none;border:none;color:var(--critical);font-size:16px;cursor:pointer;padding:4px;transition:transform .15s;}
+.ap-del:hover{transform:scale(1.2);}
+.ov-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
+.ov-stat{background:var(--canvas);border:1px solid var(--hairline-soft);border-radius:var(--r-xl);padding:20px;}
+.ov-stat-n{font-size:32px;font-weight:800;color:var(--ink-deep);letter-spacing:-1px;}
+.ov-stat-l{font-size:12px;color:var(--steel);margin-top:4px;}
+.ov-badge{font-size:11px;font-weight:700;color:var(--success);background:rgba(49,162,76,.1);border-radius:var(--r-full);padding:2px 8px;display:inline-block;margin-top:4px;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.courses-grid,.news-grid{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr 1fr 1fr;}.footer-grid>div:first-child{grid-column:1/-1;}.gallery-grid{grid-template-columns:repeat(3,1fr);}.why-grid{grid-template-columns:repeat(2,1fr);}.ov-stats{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:768px){.gn-tabs,.gn-search,.gn-actions .btn-blue{display:none;}.hamburger{display:flex;}.about-grid{grid-template-columns:1fr;gap:40px;}.about-img{order:-1;}.stats-grid{grid-template-columns:repeat(2,1fr);}.courses-grid,.news-grid{grid-template-columns:1fr;}.gallery-grid{grid-template-columns:repeat(2,1fr);}.why-grid{grid-template-columns:1fr 1fr;}.footer-grid{grid-template-columns:1fr;}.ap-form-row,.f-row{grid-template-columns:1fr;}.dl-grid{grid-template-columns:1fr 1fr;}.ap-sidebar{display:none;}.section{padding:60px 20px;}.enquiry-card{padding:28px 20px;}.sticky-bar{padding:10px 20px;}}
+@media(max-width:480px){.stats-grid{grid-template-columns:1fr 1fr;}.dl-grid{grid-template-columns:1fr;}.why-grid{grid-template-columns:1fr;}.ov-stats{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner" id="promoBanner">
+  <span>🎓 Admissions Open for 2026–27 &nbsp;·&nbsp; B.Tech · M.Tech · MBA · MCA · Diploma</span>
+  <a href="#enquiry">Apply Now →</a>
+  <button class="close-banner" id="closeBanner">×</button>
+</div>
+
+<!-- GLOBAL NAV -->
+<nav class="gn">
+  <div class="gn-inner">
+    <a href="#" class="gn-logo" id="siteName">GATE <span>Berhampur</span></a>
+    <div class="gn-tabs">
+      <div class="gn-tab" onclick="scrollSec('#about')">About</div>
+      <div class="gn-tab" style="position:relative;">Academics ▾
+        <div class="gn-drop">
+          <a href="https://www.gate.ac.in/Mca.html" target="_blank">MCA</a>
+          <a href="https://www.gate.ac.in/Mba.html" target="_blank">MBA</a>
+          <a href="https://www.gate.ac.in/B-tech cs.html" target="_blank">B.Tech CSE</a>
+          <a href="#courses" onclick="scrollSec('#courses');return false;">All Programs</a>
+          <a href="https://www.gate.ac.in/Library.html" target="_blank">Library</a>
+        </div>
+      </div>
+      <div class="gn-tab" style="position:relative;">Admissions ▾
+        <div class="gn-drop">
+          <a href="https://www.gate.ac.in/prospectus.pdf" target="_blank">Prospectus</a>
+          <a href="https://www.gate.ac.in/admiision form.pdf" target="_blank">Admission Form</a>
+          <a href="https://www.gate.ac.in/gate/Fee-Refund-Policy-2024-25.pdf" target="_blank">Fee &amp; Refund Policy</a>
+        </div>
+      </div>
+      <div class="gn-tab" onclick="scrollSec('#placement')">Placements</div>
+      <div class="gn-tab" style="position:relative;">Student Life ▾
+        <div class="gn-drop">
+          <a href="https://www.gate.ac.in/NSS.html" target="_blank">NSS</a>
+          <a href="https://www.gate.ac.in/Hostel - boy.html" target="_blank">Boys Hostel</a>
+          <a href="https://www.gate.ac.in/Hostel - girl.html" target="_blank">Girls Hostel</a>
+          <a href="https://www.gate.ac.in/gallery.html" target="_blank">Gallery</a>
+        </div>
+      </div>
+      <div class="gn-tab" onclick="scrollSec('#contact')">Contact</div>
+    </div>
+    <div class="gn-actions">
+      <span class="gn-search">🔍 Search</span>
+      <a href="https://www.gate.ac.in/admiision form.pdf" class="btn-blue" target="_blank">Apply Now</a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer-mask" id="drawerMask">
+  <div class="drawer">
+    <button class="drawer-close" id="drawerClose">✕</button>
+    <div class="drawer-sec">Navigation</div>
+    <a href="#about" class="drawer-link">About GATE</a>
+    <a href="#courses" class="drawer-link">Programs</a>
+    <a href="#news" class="drawer-link">News &amp; Notices</a>
+    <a href="#placement" class="drawer-link">Placements</a>
+    <a href="#gallery" class="drawer-link">Gallery</a>
+    <a href="#enquiry" class="drawer-link">Quick Enquiry</a>
+    <a href="#contact" class="drawer-link">Contact</a>
+    <div class="drawer-sec">Downloads</div>
+    <a href="https://www.gate.ac.in/prospectus.pdf" class="drawer-link" target="_blank">📄 Prospectus</a>
+    <a href="https://www.gate.ac.in/admiision form.pdf" class="drawer-link" target="_blank">📝 Admission Form</a>
+    <div class="drawer-sec">Admin</div>
+    <a href="#" class="drawer-link" onclick="openLogin();return false;">🔒 Admin Login</a>
+  </div>
+</div>
+
+<!-- HERO SLIDER -->
+<section class="hero">
+  <div id="heroSlides">
+    <div class="slide active">
+      <div class="slide-bg" style="background-image:url('https://www.gate.ac.in/images/home banner/GATE-1.jpeg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-eye" id="s-eye-0">Admissions Open 2026–27</div>
+        <h1 class="slide-h" id="s-h-0">Gandhi Academy of Technology &amp; Engineering</h1>
+        <p class="slide-sub" id="s-sub-0">Empowering futures at Berhampur, the Silk City of Odisha since 2009.</p>
+        <div class="slide-ctas">
+          <a href="https://www.gate.ac.in/admiision form.pdf" class="btn-black" target="_blank">Apply Now</a>
+          <a href="#about" class="btn-outline-w">Learn More</a>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide-bg" style="background-image:url('https://www.gate.ac.in/images/home banner/B-TECH CSE.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-eye" id="s-eye-1">Engineering Excellence</div>
+        <h1 class="slide-h" id="s-h-1">B.Tech in Computer Science, AI &amp; Data Science</h1>
+        <p class="slide-sub" id="s-sub-1">Cutting-edge curriculum with 330+ seats across CSE specializations.</p>
+        <div class="slide-ctas">
+          <a href="https://www.gate.ac.in/B-tech cs.html" class="btn-black" target="_blank">Explore CSE</a>
+          <a href="#courses" class="btn-outline-w">All Programs</a>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide-bg" style="background-image:url('https://www.gate.ac.in/images/home banner/MBA-1.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-eye" id="s-eye-2">Management Programs</div>
+        <h1 class="slide-h" id="s-h-2">MBA &amp; MCA — Build Your Future</h1>
+        <p class="slide-sub" id="s-sub-2">Finance, Marketing, International Business &amp; General Management.</p>
+        <div class="slide-ctas">
+          <a href="https://www.gate.ac.in/Mba.html" class="btn-black" target="_blank">MBA</a>
+          <a href="https://www.gate.ac.in/Mca.html" class="btn-outline-w" target="_blank">MCA</a>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide-bg" style="background-image:url('https://www.gate.ac.in/images/home banner/GYM.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <div class="slide-eye" id="s-eye-3">Campus Life</div>
+        <h1 class="slide-h" id="s-h-3">World-Class Campus. Vibrant Student Life.</h1>
+        <p class="slide-sub" id="s-sub-3">State-of-the-art labs, hostels, sports grounds &amp; a central canteen.</p>
+        <div class="slide-ctas">
+          <a href="#gallery" class="btn-black">View Gallery</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="hero-arrow prev" id="heroPrev">‹</button>
+  <button class="hero-arrow next" id="heroNext">›</button>
+  <div class="hero-dots" id="heroDots">
+    <div class="hero-dot active" data-i="0"></div>
+    <div class="hero-dot" data-i="1"></div>
+    <div class="hero-dot" data-i="2"></div>
+    <div class="hero-dot" data-i="3"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="sec-inner">
+    <div class="about-grid fade-up">
+      <div class="about-text">
+        <div class="sec-eye">Est. 2009 · Berhampur, Odisha</div>
+        <h2 class="sec-h" id="aboutTitle">A Legacy of Technical Excellence</h2>
+        <p id="aboutP1">Gandhi Academy of Technology and Engineering began its journey in 2009 at Berhampur, the Silk City of Odisha. Managed by the <strong>Tarini Educational Trust</strong>, GATE is approved by AICTE, New Delhi and affiliated to BPUT, Rourkela and SCTE &amp; VT, Bhubaneswar.</p>
+        <p id="aboutP2">The Institute works with a mission to provide quality education of international standards for producing technocrats and future leaders — in a disciplined, conducive environment as part of our social commitment to promote education globally.</p>
+        <p id="aboutP3">GATE holds <strong>NBA Accreditation</strong> for Mechanical Engineering (UG), Civil Engineering and Electrical Engineering (Diploma), and is <strong>NAAC</strong> graded.</p>
+        <div class="about-ctas">
+          <a href="https://www.gate.ac.in/Mandatory Disclosures-GATE conti.pdf" class="btn-black" target="_blank">Mandatory Disclosure</a>
+          <a href="https://www.gate.ac.in/gate/AICTE_ALL_ EOA_ NEW_UPDATE.pdf" class="btn-outline" target="_blank">AICTE Approval</a>
+          <a href="http://gate.grievanceportals.com/" class="btn-outline" target="_blank">Grievance Portal</a>
+        </div>
+      </div>
+      <div class="about-img">
+        <img src="https://www.gate.ac.in/images/home banner/GATE-1.jpeg" alt="GATE Campus" loading="lazy" id="aboutImg">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section bg-soft" style="padding:60px 32px;">
+  <div class="sec-inner">
+    <div class="sec-eye center fade-up">By the Numbers</div>
+    <h2 class="sec-h center fade-up">Shaping Careers Since 2009</h2>
+    <div class="stats-grid fade-up">
+      <div class="stat-cell"><div class="stat-n" data-target="5000">0</div><div class="stat-l">Students Enrolled</div></div>
+      <div class="stat-cell"><div class="stat-n" data-target="120">0</div><div class="stat-l">Education Awards</div></div>
+      <div class="stat-cell"><div class="stat-n" data-target="3200">0</div><div class="stat-l">Successful Placements</div></div>
+      <div class="stat-cell"><div class="stat-n" data-target="40">0</div><div class="stat-l">State-of-the-Art Labs</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="section" id="courses">
+  <div class="sec-inner">
+    <div class="sec-eye center fade-up">Programs</div>
+    <h2 class="sec-h center fade-up">Courses Offered</h2>
+    <p class="sec-sub center fade-up">AICTE-approved programs across engineering, management and technology.</p>
+    <div class="courses-grid fade-up" id="coursesGrid">
+      <div class="course-card">
+        <div class="c-icon">⚙️</div><div class="c-name">B.Tech</div><div class="c-seats">Multiple Specializations</div>
+        <ul class="c-list">
+          <li>Mechanical Engineering — 90 Seats</li><li>Civil Engineering — 60 Seats</li>
+          <li>CSE — 180 Seats</li><li>CSE (Artificial Intelligence) — 60 Seats</li>
+          <li>CSE (Data Science) — 60 Seats</li><li>Electrical Engineering — 60 Seats</li>
+          <li>Electronics &amp; Communication — 30 Seats</li><li>Mining Engineering — 60 Seats</li>
+        </ul>
+      </div>
+      <div class="course-card">
+        <div class="c-icon">🎓</div><div class="c-name">M.Tech</div><div class="c-seats">Postgraduate Engineering</div>
+        <ul class="c-list">
+          <li>Computer Science &amp; Engineering — 18 Seats</li>
+          <li>Electrical Power System — 18 Seats</li>
+          <li>Industrial Engineering &amp; Management — 18 Seats</li>
+        </ul>
+      </div>
+      <div class="course-card">
+        <div class="c-icon">📐</div><div class="c-name">Diploma</div><div class="c-seats">Technical Programs</div>
+        <ul class="c-list">
+          <li>Mechanical Engineering — 240 Seats</li><li>Civil Engineering — 60 Seats</li>
+          <li>Computer Science — 120 Seats</li><li>Electrical Engineering — 150 Seats</li>
+          <li>ETC Engineering — 30 Seats</li>
+          <li>Post Diploma Industrial Safety — 60 Seats</li>
+          <li>Mining Engineering — 60 Seats</li>
+        </ul>
+      </div>
+      <div class="course-card">
+        <div class="c-icon">💼</div><div class="c-name">MBA</div><div class="c-seats">Management Programs</div>
+        <ul class="c-list">
+          <li>Finance Management — 120 Seats</li><li>General Management — 60 Seats</li>
+          <li>International Business — 60 Seats</li><li>Marketing Management — 60 Seats</li>
+        </ul>
+      </div>
+      <div class="course-card">
+        <div class="c-icon">💻</div><div class="c-name">MCA</div><div class="c-seats">Master of Computer Applications</div>
+        <ul class="c-list"><li>MCA — 180 Seats</li></ul>
+      </div>
+      <div class="course-card" style="background:rgba(0,100,224,.04);border-color:rgba(0,100,224,.2);">
+        <div class="c-icon" style="background:rgba(0,100,224,.1);">📋</div>
+        <div class="c-name">Resources</div><div class="c-seats">Academic Downloads</div>
+        <ul class="c-list">
+          <li><a href="https://www.bput.ac.in/syllabus.html" style="color:var(--blue);" target="_blank">Download Syllabus</a></li>
+          <li><a href="https://results.bput.ac.in/" style="color:var(--blue);" target="_blank">Exam Results</a></li>
+          <li><a href="https://www.gate.ac.in/gate/01_Exam_Schedule.pdf" style="color:var(--blue);" target="_blank">Exam Schedule</a></li>
+          <li><a href="https://www.gate.ac.in/Online Program.pdf" style="color:var(--blue);" target="_blank">Online Programs</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="section bg-soft" id="news">
+  <div class="sec-inner">
+    <div class="sec-eye center fade-up">Announcements</div>
+    <h2 class="sec-h center fade-up">Latest News &amp; Notices</h2>
+    <p class="sec-sub center fade-up">Stay updated with the latest from GATE Berhampur.</p>
+    <div class="news-grid fade-up" id="newsGrid"></div>
+  </div>
+</section>
+
+<!-- WHY GATE -->
+<section class="section" id="placement">
+  <div class="sec-inner">
+    <div class="sec-eye center fade-up">Why GATE</div>
+    <h2 class="sec-h center fade-up">What Makes Us Different</h2>
+    <div class="why-grid fade-up">
+      <div class="why-tile"><div class="why-icon">🏛️</div><div class="why-title">AICTE Approved</div><div class="why-desc">All programs approved by Government of India, Odisha, AICTE, BPUT, and SCTE &amp; VT.</div></div>
+      <div class="why-tile"><div class="why-icon">🏆</div><div class="why-title">NBA &amp; NAAC Accredited</div><div class="why-desc">NBA Accreditation for Mechanical, Civil &amp; Electrical Engineering, with NAAC grading.</div></div>
+      <div class="why-tile"><div class="why-icon">💼</div><div class="why-title">Strong Placements</div><div class="why-desc">Dedicated T&amp;P cell with 3200+ successful placements across all programs.</div></div>
+      <div class="why-tile"><div class="why-icon">🔬</div><div class="why-title">40+ Modern Labs</div><div class="why-desc">State-of-the-art laboratories, central library, and digital learning infrastructure.</div></div>
+      <div class="why-tile"><div class="why-icon">🏠</div><div class="why-title">Hostel Facilities</div><div class="why-desc">Separate boys and girls hostels with excellent amenities and 24/7 security.</div></div>
+      <div class="why-tile"><div class="why-icon">🌐</div><div class="why-title">Online Admissions</div><div class="why-desc">Direct online registration — simple, fast, and fully paperless.</div></div>
+      <div class="why-tile"><div class="why-icon">⚖️</div><div class="why-title">Anti-Ragging Cell</div><div class="why-desc">Strict anti-ragging policy with a dedicated committee for student safety.</div></div>
+      <div class="why-tile"><div class="why-icon">🎖️</div><div class="why-title">NSS &amp; Sports</div><div class="why-desc">Active NSS unit, sports grounds, gym and extracurricular activities.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section bg-soft">
+  <div class="sec-inner">
+    <div class="sec-eye center fade-up">Student Voices</div>
+    <h2 class="sec-h center fade-up">What Our Students Say</h2>
+    <div class="testi-track fade-up">
+      <div class="testi-card"><p class="testi-q">GATE gave me the opportunity to bloom as a professional. It is the most fabulous Engineering college — a campus that treats students like a community.</p><div class="testi-author"><div class="testi-av"><img src="https://www.gate.ac.in/images/s1.jpg" alt=""></div><div><div class="testi-name">Chandan Swain</div><div class="testi-role">Student, GATE</div></div></div></div>
+      <div class="testi-card"><p class="testi-q">I am so proud of my college. This is the best engineering college in Odisha. Happy to be part of the GATE Family — CSE 2021–2025.</p><div class="testi-author"><div class="testi-av"><img src="https://www.gate.ac.in/images/hrusi.PNG" alt=""></div><div><div class="testi-name">Hrushikesh Pani</div><div class="testi-role">CSE, 2021–2025</div></div></div></div>
+      <div class="testi-card"><p class="testi-q">Best college in Odisha. GATE gives you the opportunity to explore yourself and focuses on real knowledge, not just a degree.</p><div class="testi-author"><div class="testi-av"><img src="https://www.gate.ac.in/images/s2.jpg" alt=""></div><div><div class="testi-name">Rinku Prasad Gouda</div><div class="testi-role">MCA, 2nd Year</div></div></div></div>
+      <div class="testi-card"><p class="testi-q">GATE not only taught me a lot but gave me the best ideas and opportunities for the future. Thankful to all the members of this college.</p><div class="testi-author"><div class="testi-av"><img src="https://www.gate.ac.in/Biekananda nayak.jpg" alt=""></div><div><div class="testi-name">Bibekananda Nayak</div><div class="testi-role">B.Tech CSE, 2021–2025</div></div></div></div>
+      <div class="testi-card"><p class="testi-q">GATE college made me ready for the professional world. I learnt management skills, handling pressure, communication and technical skills.</p><div class="testi-author"><div class="testi-av"><img src="https://www.gate.ac.in/images/s3.jpg" alt=""></div><div><div class="testi-name">Chintamani Choudhury</div><div class="testi-role">Student, GATE</div></div></div></div>
+      <div class="testi-card"><p class="testi-q">GATE has all the necessary infrastructure — great library, first-class labs, hostel, sports ground and experienced professors who provide high-quality knowledge.</p><div class="testi-author"><div class="testi-av">LD</div><div><div class="testi-name">Labanya Dash</div><div class="testi-role">Mechanical, 2019–2023</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+  <div class="sec-inner">
+    <div class="sec-eye center fade-up">Campus Moments</div>
+    <h2 class="sec-h center fade-up">Picture Gallery</h2>
+    <p class="sec-sub center fade-up">Events, functions, tours and campus activities.</p>
+    <div class="gallery-grid fade-up" id="galleryGrid"></div>
+    <div style="text-align:center;margin-top:32px;">
+      <a href="https://www.gate.ac.in/gallery.html" class="btn-black" target="_blank">View Full Gallery</a>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lb-close">✕</button>
+  <img src="" id="lbImg" alt="">
+</div>
+
+<!-- DOWNLOADS -->
+<section class="section bg-soft">
+  <div class="sec-inner">
+    <div class="sec-eye center fade-up">Resources</div>
+    <h2 class="sec-h center fade-up">Important Downloads</h2>
+    <div class="dl-grid fade-up">
+      <a href="https://www.gate.ac.in/prospectus.pdf" class="dl-card" target="_blank"><div class="dl-icon">📄</div><div><div class="dl-title">Prospectus 2026–27</div><div class="dl-size">PDF Document</div></div></a>
+      <a href="https://www.gate.ac.in/admiision form.pdf" class="dl-card" target="_blank"><div class="dl-icon">📝</div><div><div class="dl-title">Admission Form</div><div class="dl-size">PDF Document</div></div></a>
+      <a href="https://www.gate.ac.in/gate/AICTE_ALL_ EOA_ NEW_UPDATE.pdf" class="dl-card" target="_blank"><div class="dl-icon">✅</div><div><div class="dl-title">AICTE Approval</div><div class="dl-size">Official Certificate</div></div></a>
+      <a href="https://www.gate.ac.in/naac/Institutional_Grade_Sheet.pdf" class="dl-card" target="_blank"><div class="dl-icon">🏆</div><div><div class="dl-title">NAAC Grade Sheet</div><div class="dl-size">PDF Document</div></div></a>
+      <a href="https://www.gate.ac.in/NBA/NBA.pdf" class="dl-card" target="_blank"><div class="dl-icon">🎖️</div><div><div class="dl-title">NBA Certificate</div><div class="dl-size">Accreditation</div></div></a>
+      <a href="https://www.gate.ac.in/NIRF/NIRF_GATE.pdf" class="dl-card" target="_blank"><div class="dl-icon">📊</div><div><div class="dl-title">NIRF Report</div><div class="dl-size">Rankings Data</div></div></a>
+      <a href="https://www.gate.ac.in/Handbook/Student-Handbook-GATE.pdf" class="dl-card" target="_blank"><div class="dl-icon">📚</div><div><div class="dl-title">Student Handbook</div><div class="dl-size">PDF Document</div></div></a>
+      <a href="https://www.gate.ac.in/gate/Full _Audit Report-4.pdf" class="dl-card" target="_blank"><div class="dl-icon">📈</div><div><div class="dl-title">Annual Audit Report</div><div class="dl-size">Financial Report</div></div></a>
+      <a href="https://www.gate.ac.in/gate/News_Letter_Apr_Jun_2025.pdf" class="dl-card" target="_blank"><div class="dl-icon">📰</div><div><div class="dl-title">Newsletter 2026</div><div class="dl-size">PDF Document</div></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="sec-inner" style="max-width:800px;">
+    <div class="sec-eye center fade-up">FAQs</div>
+    <h2 class="sec-h center fade-up">Frequently Asked Questions</h2>
+    <div class="faq-stack fade-up" id="faqStack"></div>
+  </div>
+</section>
+
+<!-- ENQUIRY -->
+<section class="section bg-soft" id="enquiry">
+  <div class="sec-inner">
+    <div class="sec-eye center fade-up">Get In Touch</div>
+    <h2 class="sec-h center fade-up">Quick Enquiry</h2>
+    <p class="sec-sub center fade-up">Our admissions team will get back to you promptly.</p>
+    <div class="enquiry-card fade-up">
+      <div class="f-row">
+        <div class="f-field"><label>First Name</label><input type="text" id="fName" placeholder="Your first name"></div>
+        <div class="f-field"><label>Last Name</label><input type="text" id="lName" placeholder="Your last name"></div>
+      </div>
+      <div class="f-row">
+        <div class="f-field"><label>Email</label><input type="email" id="fEmail" placeholder="you@example.com"></div>
+        <div class="f-field"><label>Phone</label><input type="tel" id="fPhone" placeholder="+91 XXXXXXXXXX"></div>
+      </div>
+      <div class="f-field">
+        <label>Select Course</label>
+        <select id="fCourse">
+          <option value="">— Choose a Program —</option>
+          <option>B.Tech – CSE</option><option>B.Tech – CSE (AI)</option><option>B.Tech – CSE (Data Science)</option>
+          <option>B.Tech – Mechanical</option><option>B.Tech – Civil</option><option>B.Tech – Electrical</option>
+          <option>B.Tech – Electronics &amp; Communication</option><option>B.Tech – Mining</option>
+          <option>M.Tech – CSE</option><option>M.Tech – Electrical Power System</option>
+          <option>MBA</option><option>MCA</option>
+          <option>Diploma – Computer Science</option><option>Diploma – Mechanical</option><option>Diploma – Civil</option>
+        </select>
+      </div>
+      <div class="f-field"><label>Message (Optional)</label><textarea id="fMsg" rows="4" placeholder="Any specific questions…"></textarea></div>
+      <button class="form-submit" id="formSubmit">Send Enquiry →</button>
+      <p id="formMsg" style="text-align:center;margin-top:12px;font-size:14px;color:var(--success);display:none;">✅ Thank you! We will be in touch shortly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="section" id="contact">
+  <div class="sec-inner">
+    <div class="sec-eye center fade-up">Find Us</div>
+    <h2 class="sec-h center fade-up">Our Location</h2>
+    <p class="sec-sub center fade-up" id="campusAddr">Golanthara, Berhampur, Ganjam, Odisha — 761008</p>
+    <div class="map-wrap fade-up">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120552.58849821764!2d84.60527404335937!3d19.227131399999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3d44942d60a401%3A0x6bb2d8dcf8ebb293!2sGandhi%20Academy%20of%20Technology%20and%20Engg.!5e0!3m2!1sen!2sin!4v1721475315374!5m2!1sen!2sin" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="GATE Map"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name"><span id="footerName">GATE</span> Berhampur</div>
+        <p>Gandhi Academy of Technology and Engineering — Est. 2009, Berhampur, Odisha. Managed by the Tarini Educational Trust. Approved by AICTE, New Delhi.</p>
+        <p style="font-size:12px;color:var(--stone);">NBA Accredited · NAAC Graded · Affiliated to BPUT &amp; SCTE&amp;VT</p>
+        <div style="margin-top:16px;">
+          <div class="fc-item">📍 <span id="footerAddr">Golanthara, Berhampur, Ganjam, Odisha — 761008</span></div>
+          <div class="fc-item">📞 <a href="tel:+919337753377" id="footerPhone">+91 9337753377</a> &nbsp;|&nbsp; <a href="tel:+919338822004">+91 9338822004</a></div>
+          <div class="fc-item">✉ <a href="mailto:principal@gate.ac.in" id="footerEmail">principal@gate.ac.in</a></div>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Academics</h4><ul>
+        <li><a href="https://www.gate.ac.in/Mca.html" target="_blank">MCA</a></li>
+        <li><a href="https://www.gate.ac.in/Mba.html" target="_blank">MBA</a></li>
+        <li><a href="https://www.gate.ac.in/B-tech cs.html" target="_blank">B.Tech CSE</a></li>
+        <li><a href="https://www.gate.ac.in/Library.html" target="_blank">Library</a></li>
+        <li><a href="https://www.gate.ac.in/gallery.html" target="_blank">Gallery</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Administration</h4><ul>
+        <li><a href="https://www.gate.ac.in/principal.html" target="_blank">Principal</a></li>
+        <li><a href="https://www.gate.ac.in/faculty.html" target="_blank">Faculty Profile</a></li>
+        <li><a href="https://www.gate.ac.in/NSS.html" target="_blank">NSS Cell</a></li>
+        <li><a href="https://www.gate.ac.in/Anti-ragging.html" target="_blank">Anti-Ragging</a></li>
+        <li><a href="https://www.gate.ac.in/alumni.html" target="_blank">Alumni</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Placements</h4><ul>
+        <li><a href="https://www.gate.ac.in/training.html" target="_blank">T&amp;P Cell</a></li>
+        <li><a href="https://www.gate.ac.in/Placement/PLACEMENT_ STUDENTS LIST_MCA.pdf" target="_blank">MCA Placements</a></li>
+        <li><a href="https://www.gate.ac.in/Placement/PLACEMENT_ STUDENTS LIST_ MBA.pdf" target="_blank">MBA Placements</a></li>
+        <li><a href="https://www.gate.ac.in/Placement/PLACEMENT_ STUDENTS LIST_ B.Tech.pdf" target="_blank">B.Tech Placements</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul>
+        <li><a href="https://www.gate.ac.in/admiision form.pdf" target="_blank">Admission Form</a></li>
+        <li><a href="https://www.gate.ac.in/prospectus.pdf" target="_blank">Prospectus</a></li>
+        <li><a href="https://www.gate.ac.in/Mandatory Disclosures-GATE conti.pdf" target="_blank">Mandatory Disclosure</a></li>
+        <li><a href="http://gate.grievanceportals.com/" target="_blank">Grievance Portal</a></li>
+        <li><a href="https://www.onlinesbi.sbi/sbicollect/" target="_blank">Pay Online</a></li>
+        <li><a href="#" onclick="openLogin();return false;">Admin Login</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026–27 Gandhi Academy of Technology &amp; Engineering (GATE), Berhampur, Odisha. All rights reserved.</div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/share/165XEZcg8L/" class="social-btn" target="_blank">f</a>
+        <a href="https://www.instagram.com/gate.berhampur" class="social-btn" target="_blank">in</a>
+        <a href="https://wa.me/9337753377" class="social-btn" target="_blank">W</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <div><div class="sticky-bar-t">Admissions Open 2026–27</div><div class="sticky-bar-s">B.Tech · M.Tech · Diploma · MBA · MCA</div></div>
+  <a href="https://www.gate.ac.in/admiision form.pdf" class="btn-blue" target="_blank">Apply Now</a>
+</div>
+
+<!-- ADMIN LOGIN MODAL -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-modal">
+    <h2>🔒 Admin Login</h2>
+    <p>Sign in to manage content, news, gallery and site settings.</p>
+    <div class="ap-field"><label>Username</label><input type="text" id="adminUser" placeholder="admin" autocomplete="username"></div>
+    <div class="ap-field"><label>Password</label><input type="password" id="adminPass" placeholder="••••••••" autocomplete="current-password"></div>
+    <div style="display:flex;gap:10px;margin-top:4px;">
+      <button class="ap-btn" onclick="doLogin()" style="flex:1;">Sign In →</button>
+      <button class="ap-btn secondary" onclick="closeLogin()" style="flex:1;">Cancel</button>
+    </div>
+    <p class="admin-err" id="adminErr">❌ Incorrect username or password.</p>
+    <p style="font-size:11px;color:var(--stone);margin-top:16px;text-align:center;">Default credentials: admin / gate@2026</p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div class="ap-nav">
+    <div class="ap-nav-logo">GATE <span>Admin Panel</span></div>
+    <div class="ap-nav-actions">
+      <span style="font-size:12px;opacity:.6;" id="apWelcome">Welcome, Admin</span>
+      <button class="ap-nav-btn" onclick="viewSite()">← View Site</button>
+      <button class="ap-nav-btn" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+  <div class="ap-body">
+    <div class="ap-sidebar">
+      <h3>Dashboard</h3>
+      <button class="ap-link active" onclick="switchTab(this,'overview')"><span class="ic">📊</span> Overview</button>
+      <h3>Content</h3>
+      <button class="ap-link" onclick="switchTab(this,'hero')"><span class="ic">🎞️</span> Hero Slides</button>
+      <button class="ap-link" onclick="switchTab(this,'about')"><span class="ic">ℹ️</span> About Section</button>
+      <button class="ap-link" onclick="switchTab(this,'news')"><span class="ic">📰</span> News &amp; Notices</button>
+      <button class="ap-link" onclick="switchTab(this,'gallery')"><span class="ic">🖼️</span> Gallery</button>
+      <button class="ap-link" onclick="switchTab(this,'faq')"><span class="ic">❓</span> FAQ</button>
+      <h3>Settings</h3>
+      <button class="ap-link" onclick="switchTab(this,'contact')"><span class="ic">📞</span> Contact Info</button>
+      <button class="ap-link" onclick="switchTab(this,'settings')"><span class="ic">⚙️</span> Site Settings</button>
+    </div>
+    <div class="ap-content">
+
+      <!-- OVERVIEW TAB -->
+      <div class="ap-tab active" id="tab-overview">
+        <div class="ap-page-title">Dashboard Overview</div>
+        <div class="ap-page-sub">Welcome to the GATE website admin panel. Manage all content from here.</div>
+        <div class="ov-stats">
+          <div class="ov-stat"><div class="ov-stat-n" id="ov-news">0</div><div class="ov-stat-l">News Items</div><div class="ov-badge">Live</div></div>
+          <div class="ov-stat"><div class="ov-stat-n" id="ov-gallery">0</div><div class="ov-stat-l">Gallery Images</div><div class="ov-badge">Live</div></div>
+          <div class="ov-stat"><div class="ov-stat-n" id="ov-faq">0</div><div class="ov-stat-l">FAQ Items</div><div class="ov-badge">Live</div></div>
+          <div class="ov-stat"><div class="ov-stat-n">4</div><div class="ov-stat-l">Hero Slides</div><div class="ov-badge">Live</div></div>
+        </div>
+        <div class="ap-card">
+          <div class="ap-card-title">Quick Actions</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="ap-btn" onclick="switchTab(document.querySelectorAll('.ap-link')[3],'news')">+ Add News</button>
+            <button class="ap-btn secondary" onclick="switchTab(document.querySelectorAll('.ap-link')[4],'gallery')">+ Add Gallery Image</button>
+            <button class="ap-btn secondary" onclick="switchTab(document.querySelectorAll('.ap-link')[2],'hero')">Edit Hero Slides</button>
+            <button class="ap-btn secondary" onclick="switchTab(document.querySelectorAll('.ap-link')[6],'contact')">Update Contact</button>
+          </div>
+        </div>
+        <div class="ap-card">
+          <div class="ap-card-title">Recent News</div>
+          <table class="ap-table" id="ovNewsTable"><thead><tr><th>Title</th><th>Badge</th><th>Date</th></tr></thead><tbody id="ovNewsBody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- HERO TAB -->
+      <div class="ap-tab" id="tab-hero">
+        <div class="ap-page-title">Hero Slides</div>
+        <div class="ap-page-sub">Edit the homepage hero banner content. Changes apply instantly.</div>
+        <div id="heroEditorList"></div>
+        <p class="ap-success" id="heroSuccess">✅ Slide updated on site!</p>
+      </div>
+
+      <!-- ABOUT TAB -->
+      <div class="ap-tab" id="tab-about">
+        <div class="ap-page-title">About Section</div>
+        <div class="ap-page-sub">Edit the about section text and campus image.</div>
+        <div class="ap-card">
+          <div class="ap-card-title">Content</div>
+          <div class="ap-field"><label>Section Title</label><input type="text" id="ap-aboutTitle" value="A Legacy of Technical Excellence"></div>
+          <div class="ap-field"><label>Paragraph 1</label><textarea id="ap-aboutP1" rows="4">Gandhi Academy of Technology and Engineering began its journey in 2009 at Berhampur, the Silk City of Odisha. Managed by the Tarini Educational Trust, GATE is approved by AICTE, New Delhi.</textarea></div>
+          <div class="ap-field"><label>Paragraph 2</label><textarea id="ap-aboutP2" rows="3">The Institute works with a mission to provide quality education of international standards for producing technocrats and future leaders.</textarea></div>
+          <div class="ap-field"><label>Paragraph 3</label><textarea id="ap-aboutP3" rows="3">GATE holds NBA Accreditation for Mechanical Engineering (UG), Civil Engineering and Electrical Engineering (Diploma), and is NAAC graded.</textarea></div>
+          <div class="ap-field"><label>Image URL</label><input type="text" id="ap-aboutImg" placeholder="https://..."></div>
+          <button class="ap-btn" onclick="saveAbout()">Save Changes</button>
+          <p class="ap-success" id="aboutSuccess">✅ About section updated!</p>
+        </div>
+      </div>
+
+      <!-- NEWS TAB -->
+      <div class="ap-tab" id="tab-news">
+        <div class="ap-page-title">News &amp; Notices</div>
+        <div class="ap-page-sub">Add, edit or remove news items displayed on the homepage.</div>
+        <div class="ap-card">
+          <div class="ap-card-title">Add New Item</div>
+          <div class="ap-form-row">
+            <div class="ap-field"><label>Title</label><input type="text" id="np-title" placeholder="Notice title…"></div>
+            <div class="ap-field"><label>Badge Type</label>
+              <select id="np-badge">
+                <option value="badge-blue">Notice</option>
+                <option value="badge-warn">Timetable</option>
+                <option value="badge-success">Admissions</option>
+              </select>
+            </div>
+          </div>
+          <div class="ap-form-row">
+            <div class="ap-field"><label>Link URL (optional)</label><input type="text" id="np-url" placeholder="https://…"></div>
+            <div class="ap-field"><label>Date</label><input type="date" id="np-date"></div>
+          </div>
+          <button class="ap-btn" onclick="addNews()">Add News Item</button>
+          <p class="ap-success" id="newsSuccess">✅ News item added!</p>
+        </div>
+        <div class="ap-card">
+          <div class="ap-card-title">All News Items</div>
+          <table class="ap-table"><thead><tr><th>Title</th><th>Badge</th><th>Date</th><th></th></tr></thead><tbody id="newsTableBody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- GALLERY TAB -->
+      <div class="ap-tab" id="tab-gallery">
+        <div class="ap-page-title">Gallery Manager</div>
+        <div class="ap-page-sub">Add images by URL or remove existing ones.</div>
+        <div class="ap-card">
+          <div class="ap-card-title">Add Image</div>
+          <div class="ap-form-row">
+            <div class="ap-field"><label>Image URL</label><input type="text" id="gp-url" placeholder="https://example.com/photo.jpg"></div>
+            <div class="ap-field"><label>Caption</label><input type="text" id="gp-caption" placeholder="Image caption…"></div>
+          </div>
+          <button class="ap-btn" onclick="addGalleryImg()">Add to Gallery</button>
+          <p class="ap-success" id="gallerySuccess">✅ Image added!</p>
+        </div>
+        <div class="ap-card">
+          <div class="ap-card-title">Gallery Images (<span id="galleryCount">0</span>)</div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;" id="apGalleryGrid"></div>
+        </div>
+      </div>
+
+      <!-- FAQ TAB -->
+      <div class="ap-tab" id="tab-faq">
+        <div class="ap-page-title">FAQ Manager</div>
+        <div class="ap-page-sub">Add or remove FAQ items shown on the website.</div>
+        <div class="ap-card">
+          <div class="ap-card-title">Add New FAQ</div>
+          <div class="ap-field"><label>Question</label><input type="text" id="fq-q" placeholder="Enter question…"></div>
+          <div class="ap-field"><label>Answer</label><textarea id="fq-a" rows="3" placeholder="Enter answer…"></textarea></div>
+          <button class="ap-btn" onclick="addFAQ()">Add FAQ</button>
+          <p class="ap-success" id="faqSuccess">✅ FAQ added!</p>
+        </div>
+        <div class="ap-card">
+          <div class="ap-card-title">All FAQs</div>
+          <table class="ap-table"><thead><tr><th>Question</th><th></th></tr></thead><tbody id="faqTableBody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- CONTACT TAB -->
+      <div class="ap-tab" id="tab-contact">
+        <div class="ap-page-title">Contact Information</div>
+        <div class="ap-page-sub">Update contact details shown across the website.</div>
+        <div class="ap-card">
+          <div class="ap-form-row">
+            <div class="ap-field"><label>College Name</label><input type="text" id="ci-name" value="GATE Berhampur"></div>
+            <div class="ap-field"><label>Phone Number</label><input type="tel" id="ci-phone" value="+91 9337753377"></div>
+          </div>
+          <div class="ap-form-row">
+            <div class="ap-field"><label>Email Address</label><input type="email" id="ci-email" value="principal@gate.ac.in"></div>
+            <div class="ap-field"><label>Website</label><input type="text" id="ci-web" value="https://www.gate.ac.in"></div>
+          </div>
+          <div class="ap-field"><label>Address</label><textarea id="ci-addr" rows="2">Golanthara, Berhampur, Ganjam, Odisha — 761008</textarea></div>
+          <button class="ap-btn" onclick="saveContact()">Save Contact Info</button>
+          <p class="ap-success" id="contactSuccess">✅ Contact info updated!</p>
+        </div>
+      </div>
+
+      <!-- SETTINGS TAB -->
+      <div class="ap-tab" id="tab-settings">
+        <div class="ap-page-title">Site Settings</div>
+        <div class="ap-page-sub">Manage global settings and admin credentials.</div>
+        <div class="ap-card">
+          <div class="ap-card-title">Promo Banner</div>
+          <div class="ap-field"><label>Banner Text</label><input type="text" id="si-banner" value="🎓 Admissions Open for 2026–27 · B.Tech · M.Tech · MBA · MCA · Diploma"></div>
+          <div class="ap-field"><label>Link Text</label><input type="text" id="si-bannerLink" value="Apply Now →"></div>
+          <button class="ap-btn" onclick="saveBanner()">Update Banner</button>
+          <p class="ap-success" id="bannerSuccess">✅ Banner updated!</p>
+        </div>
+        <div class="ap-card" style="margin-top:16px;">
+          <div class="ap-card-title">Change Admin Credentials</div>
+          <div class="ap-form-row">
+            <div class="ap-field"><label>New Username</label><input type="text" id="si-user" placeholder="New username"></div>
+            <div class="ap-field"><label>New Password</label><input type="password" id="si-pass" placeholder="New password"></div>
+          </div>
+          <button class="ap-btn" onclick="changePass()">Update Credentials</button>
+          <p class="ap-success" id="passSuccess">✅ Credentials updated!</p>
+        </div>
+      </div>
+
+    </div><!-- /ap-content -->
+  </div><!-- /ap-body -->
+</div><!-- /admin-panel -->
+<script>
+// ── DATA STORE ──────────────────────────────────────────────────
+var DATA = {
+  admin: { user: 'admin', pass: 'gate@2026' },
+  idSeq: 100,
+  news: [
+    { id:1, title:'Notice Regarding Conduct of Internal Examination', badge:'badge-blue', label:'Notice', url:'https://www.gate.ac.in/notice/Notice regarding conduct of Internal Examination.pdf', date:'2026-05-10' },
+    { id:2, title:'B.Tech & MCA Internal Examination Time Table Released', badge:'badge-warn', label:'Timetable', url:'https://www.gate.ac.in/notice/B-Tech & MCA Internal Time Table.pdf', date:'2026-05-08' },
+    { id:3, title:'Exam Schedule for Regular & Back Examinations 2025-26 Even Semester', badge:'badge-blue', label:'Exam', url:'https://www.gate.ac.in/gate/01_Exam_Schedule.pdf', date:'2026-04-20' },
+    { id:4, title:'Civil Engineering Online Registration Open for Session 2026', badge:'badge-success', label:'Admissions', url:'https://www.gate.ac.in/admiision form.pdf', date:'2026-04-01' },
+    { id:5, title:'Mechanical Engineering Online Registration Open for Session 2026', badge:'badge-success', label:'Admissions', url:'https://www.gate.ac.in/admiision form.pdf', date:'2026-04-01' },
+    { id:6, title:'GATE Newsletter — January to March 2026 Now Available', badge:'badge-blue', label:'Newsletter', url:'https://www.gate.ac.in/gate/NEWS_LETTER JAN- MAR 2026.pdf', date:'2026-03-31' }
+  ],
+  gallery: [
+    { id:1, url:'https://www.gate.ac.in/images/Republic-Day-01.jpeg', caption:'Republic Day' },
+    { id:2, url:'https://www.gate.ac.in/images/Republic Day 02.jpeg', caption:'' },
+    { id:3, url:'https://www.gate.ac.in/images/Republic Day 03.jpeg', caption:'' },
+    { id:4, url:'https://www.gate.ac.in/images/Republic Day 05.jpeg', caption:'' },
+    { id:5, url:'https://www.gate.ac.in/images/01.jpg', caption:'Events' },
+    { id:6, url:'https://www.gate.ac.in/images/02.jpg', caption:'Events' },
+    { id:7, url:'https://www.gate.ac.in/images/03.jpg', caption:'Events' },
+    { id:8, url:'https://www.gate.ac.in/images/home banner/CENTRAL CANTEEN.jpg', caption:'Central Canteen' }
+  ],
+  faq: [
+    { id:1, q:'Is GATE college approved by AICTE?', a:'Yes. Gandhi Academy of Technology and Engineering is approved by AICTE, New Delhi and affiliated to BPUT, Rourkela and SCTE & VT, Bhubaneswar, Odisha.' },
+    { id:2, q:'How do I apply for admission?', a:'GATE has Direct Online Registration and Admission. Download the admission form from this website or visit the campus. Admissions are open for 2026-27 across all programs.' },
+    { id:3, q:'Does GATE have hostel facilities?', a:'Yes. GATE has separate hostel facilities for boys and girls with all modern amenities, security, and a central canteen on campus.' },
+    { id:4, q:'What is the placement record?', a:'GATE has a dedicated T&P cell with over 3,200 successful placements across B.Tech, MBA, MCA and Diploma programs. Placement lists are downloadable from this website.' },
+    { id:5, q:'Is GATE accredited by NBA or NAAC?', a:'Yes. GATE holds NBA Accreditation for Mechanical Engineering (UG), Civil Engineering (Diploma) and Electrical Engineering (Diploma). The institution is also NAAC graded.' }
+  ],
+  hero: [
+    { eye:'Admissions Open 2026-27', h:'Gandhi Academy of Technology & Engineering', sub:'Empowering futures at Berhampur, the Silk City of Odisha since 2009.' },
+    { eye:'Engineering Excellence', h:'B.Tech in Computer Science, AI & Data Science', sub:'Cutting-edge curriculum with 330+ seats across CSE specializations.' },
+    { eye:'Management Programs', h:'MBA & MCA — Build Your Future', sub:'Finance, Marketing, International Business & General Management.' },
+    { eye:'Campus Life', h:'World-Class Campus. Vibrant Student Life.', sub:'State-of-the-art labs, hostels, sports grounds & a central canteen.' }
+  ]
+};
+function nextId(){ return ++DATA.idSeq; }
+
+// ── HERO SLIDER ─────────────────────────────────────────────────
+var slides = document.querySelectorAll('.slide');
+var dots = document.querySelectorAll('.hero-dot');
+var cur = 0, autoT;
+function goTo(i){
+  slides[cur].classList.remove('active');
+  dots[cur].classList.remove('active');
+  cur = (i + slides.length) % slides.length;
+  slides[cur].classList.add('active');
+  dots[cur].classList.add('active');
+}
+function startAuto(){ clearInterval(autoT); autoT = setInterval(function(){ goTo(cur+1); }, 5500); }
+document.getElementById('heroPrev').onclick = function(){ goTo(cur-1); startAuto(); };
+document.getElementById('heroNext').onclick = function(){ goTo(cur+1); startAuto(); };
+dots.forEach(function(d){ d.onclick = function(){ goTo(+d.dataset.i); startAuto(); }; });
+startAuto();
+var tx=0;
+document.querySelector('.hero').addEventListener('touchstart', function(e){ tx=e.touches[0].clientX; },{passive:true});
+document.querySelector('.hero').addEventListener('touchend', function(e){
+  var dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>50){ goTo(dx<0?cur+1:cur-1); startAuto(); }
+},{passive:true});
+
+// ── PROMO BANNER ────────────────────────────────────────────────
+document.getElementById('closeBanner').onclick = function(){ document.getElementById('promoBanner').style.display='none'; };
+
+// ── SMOOTH SCROLL ───────────────────────────────────────────────
+function scrollSec(sel){
+  var el = document.querySelector(sel);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var t = document.querySelector(a.getAttribute('href'));
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+
+// ── MOBILE DRAWER ───────────────────────────────────────────────
+var drawerMask = document.getElementById('drawerMask');
+document.getElementById('hamburger').onclick = function(){ drawerMask.style.display='block'; document.body.style.overflow='hidden'; };
+document.getElementById('drawerClose').onclick  = closeDrawer;
+drawerMask.addEventListener('click', function(e){ if(e.target===drawerMask) closeDrawer(); });
+document.querySelectorAll('.drawer-link').forEach(function(l){ l.addEventListener('click', closeDrawer); });
+function closeDrawer(){ drawerMask.style.display='none'; document.body.style.overflow=''; }
+
+// ── SCROLL ANIMATIONS ───────────────────────────────────────────
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){
+      setTimeout(function(){ e.target.classList.add('visible'); }, i*70);
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(function(el){ io.observe(el); });
+
+// ── COUNTER ─────────────────────────────────────────────────────
+function animCount(el, target){
+  var s = performance.now();
+  function u(now){
+    var p = Math.min((now-s)/1800, 1);
+    var e = 1-Math.pow(1-p,3);
+    el.textContent = Math.round(e*target).toLocaleString()+'+';
+    if(p<1) requestAnimationFrame(u);
+  }
+  requestAnimationFrame(u);
+}
+var cio = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ animCount(e.target, +e.target.dataset.target); cio.unobserve(e.target); } });
+},{threshold:0.5});
+document.querySelectorAll('.stat-n[data-target]').forEach(function(n){ cio.observe(n); });
+
+// ── STICKY BAR ──────────────────────────────────────────────────
+window.addEventListener('scroll', function(){
+  document.getElementById('stickyBar').classList.toggle('visible', window.scrollY > 500);
+},{passive:true});
+
+// ── LIGHTBOX ────────────────────────────────────────────────────
+function openLightbox(src){ document.getElementById('lbImg').src=src; document.getElementById('lightbox').classList.add('open'); }
+function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); }
+
+// ── NEWS RENDERER ───────────────────────────────────────────────
+function fmtDate(d){
+  if(!d) return '';
+  var dt = new Date(d);
+  return dt.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+}
+function renderNews(){
+  var grid = document.getElementById('newsGrid');
+  grid.innerHTML = DATA.news.slice(0,6).map(function(n){
+    return '<div class="news-card"><div class="news-body">' +
+      '<div class="news-date">'+fmtDate(n.date)+'</div>' +
+      '<span class="badge '+n.badge+'">'+n.label+'</span>' +
+      '<h3 class="news-title">'+n.title+'</h3>' +
+      (n.url ? '<a href="'+n.url+'" class="news-link" target="_blank">View Notice</a>' : '') +
+      '</div></div>';
+  }).join('');
+}
+renderNews();
+
+// ── GALLERY RENDERER ────────────────────────────────────────────
+function renderGallery(){
+  var grid = document.getElementById('galleryGrid');
+  grid.innerHTML = DATA.gallery.map(function(g){
+    return '<div class="gallery-item" onclick="openLightbox(\''+g.url+'\')">' +
+      '<img src="'+g.url+'" alt="'+g.caption+'" loading="lazy">' +
+      '<div class="gallery-ov">🔍</div></div>';
+  }).join('');
+}
+renderGallery();
+
+// ── FAQ RENDERER ────────────────────────────────────────────────
+function renderFAQ(){
+  document.getElementById('faqStack').innerHTML = DATA.faq.map(function(f){
+    return '<div class="faq-item">' +
+      '<div class="faq-q" onclick="this.closest(\'.faq-item\').classList.toggle(\'open\')">'+f.q+' <span class="faq-chevron">⌄</span></div>' +
+      '<div class="faq-a">'+f.a+'</div></div>';
+  }).join('');
+}
+renderFAQ();
+
+// ── ENQUIRY FORM ────────────────────────────────────────────────
+document.getElementById('formSubmit').onclick = function(){
+  var f=document.getElementById('fName').value.trim();
+  var em=document.getElementById('fEmail').value.trim();
+  var co=document.getElementById('fCourse').value;
+  if(!f||!em||!co){ alert('Please fill in name, email and select a course.'); return; }
+  var msg=document.getElementById('formMsg');
+  msg.style.display='block';
+  this.disabled=true; this.textContent='Sent ✓'; this.style.background='#31a24c';
+};
+
+// ── ADMIN LOGIN ─────────────────────────────────────────────────
+function openLogin(){ document.getElementById('adminOverlay').classList.add('open'); }
+function closeLogin(){ document.getElementById('adminOverlay').classList.remove('open'); document.getElementById('adminErr').style.display='none'; }
+document.getElementById('adminOverlay').addEventListener('click', function(e){ if(e.target===this) closeLogin(); });
+document.getElementById('adminPass').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
+function doLogin(){
+  var u=document.getElementById('adminUser').value.trim();
+  var p=document.getElementById('adminPass').value;
+  if(u===DATA.admin.user && p===DATA.admin.pass){
+    closeLogin();
+    document.getElementById('adminPanel').classList.add('open');
+    document.body.style.overflow='hidden';
+    refreshAdmin();
+  } else {
+    document.getElementById('adminErr').style.display='block';
+  }
+}
+function doLogout(){ document.getElementById('adminPanel').classList.remove('open'); document.body.style.overflow=''; }
+function viewSite(){ document.getElementById('adminPanel').classList.remove('open'); document.body.style.overflow=''; }
+
+// ── ADMIN TAB SWITCH ────────────────────────────────────────────
+function switchTab(btn, tabId){
+  document.querySelectorAll('.ap-link').forEach(function(l){ l.classList.remove('active'); });
+  document.querySelectorAll('.ap-tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('tab-'+tabId).classList.add('active');
+}
+function showOK(id){ var el=document.getElementById(id); el.style.display='block'; setTimeout(function(){ el.style.display='none'; },2500); }
+
+// ── REFRESH ALL ADMIN DATA ──────────────────────────────────────
+function refreshAdmin(){
+  renderAdminNews(); renderAdminGallery(); renderAdminFAQ(); renderHeroEditor(); renderOvNews();
+  document.getElementById('ov-news').textContent    = DATA.news.length;
+  document.getElementById('ov-gallery').textContent = DATA.gallery.length;
+  document.getElementById('ov-faq').textContent     = DATA.faq.length;
+  document.getElementById('galleryCount').textContent = DATA.gallery.length;
+  document.getElementById('ap-aboutImg').value = document.getElementById('aboutImg').src;
+}
+
+// ── OVERVIEW NEWS TABLE ─────────────────────────────────────────
+function renderOvNews(){
+  document.getElementById('ovNewsBody').innerHTML = DATA.news.slice(0,5).map(function(n){
+    return '<tr><td>'+n.title+'</td><td><span class="badge '+n.badge+'" style="font-size:10px;">'+n.label+'</span></td><td>'+n.date+'</td></tr>';
+  }).join('');
+}
+
+// ── HERO EDITOR ─────────────────────────────────────────────────
+function renderHeroEditor(){
+  document.getElementById('heroEditorList').innerHTML = DATA.hero.map(function(h,i){
+    return '<div class="ap-card"><div class="ap-card-title">Slide '+(i+1)+'</div>' +
+      '<div class="ap-field"><label>Eyebrow</label><input type="text" id="he-eye-'+i+'" value="'+h.eye+'"></div>' +
+      '<div class="ap-field"><label>Headline</label><input type="text" id="he-h-'+i+'" value="'+h.h+'"></div>' +
+      '<div class="ap-field"><label>Subheadline</label><input type="text" id="he-sub-'+i+'" value="'+h.sub+'"></div>' +
+      '<button class="ap-btn secondary" style="font-size:12px;" onclick="saveSlide('+i+')">Save Slide '+(i+1)+'</button></div>';
+  }).join('');
+}
+function saveSlide(i){
+  DATA.hero[i].eye = document.getElementById('he-eye-'+i).value;
+  DATA.hero[i].h   = document.getElementById('he-h-'+i).value;
+  DATA.hero[i].sub = document.getElementById('he-sub-'+i).value;
+  var ey=document.getElementById('s-eye-'+i), hh=document.getElementById('s-h-'+i), sb=document.getElementById('s-sub-'+i);
+  if(ey) ey.textContent = DATA.hero[i].eye;
+  if(hh) hh.textContent = DATA.hero[i].h;
+  if(sb) sb.textContent = DATA.hero[i].sub;
+  showOK('heroSuccess');
+}
+
+// ── ABOUT ───────────────────────────────────────────────────────
+function saveAbout(){
+  document.getElementById('aboutTitle').textContent = document.getElementById('ap-aboutTitle').value;
+  document.getElementById('aboutP1').innerHTML      = document.getElementById('ap-aboutP1').value;
+  document.getElementById('aboutP2').innerHTML      = document.getElementById('ap-aboutP2').value;
+  document.getElementById('aboutP3').innerHTML      = document.getElementById('ap-aboutP3').value;
+  var imgUrl = document.getElementById('ap-aboutImg').value.trim();
+  if(imgUrl) document.getElementById('aboutImg').src = imgUrl;
+  showOK('aboutSuccess');
+}
+
+// ── NEWS ADMIN ──────────────────────────────────────────────────
+function addNews(){
+  var title = document.getElementById('np-title').value.trim();
+  var badge = document.getElementById('np-badge').value;
+  var label = document.getElementById('np-badge').options[document.getElementById('np-badge').selectedIndex].text;
+  var url   = document.getElementById('np-url').value.trim();
+  var date  = document.getElementById('np-date').value;
+  if(!title){ alert('Please enter a title.'); return; }
+  DATA.news.unshift({ id:nextId(), title:title, badge:badge, label:label, url:url, date:date });
+  document.getElementById('np-title').value='';
+  document.getElementById('np-url').value='';
+  document.getElementById('np-date').value='';
+  renderNews(); renderAdminNews(); renderOvNews();
+  document.getElementById('ov-news').textContent = DATA.news.length;
+  showOK('newsSuccess');
+}
+function renderAdminNews(){
+  document.getElementById('newsTableBody').innerHTML = DATA.news.map(function(n){
+    return '<tr><td>'+n.title+'</td>' +
+      '<td><span class="badge '+n.badge+'" style="font-size:10px;">'+n.label+'</span></td>' +
+      '<td>'+n.date+'</td>' +
+      '<td><button class="ap-del" onclick="deleteNews('+n.id+')">🗑</button></td></tr>';
+  }).join('');
+}
+function deleteNews(id){
+  if(!confirm('Delete this news item?')) return;
+  DATA.news = DATA.news.filter(function(n){ return n.id!==id; });
+  renderNews(); renderAdminNews(); renderOvNews();
+  document.getElementById('ov-news').textContent = DATA.news.length;
+}
+
+// ── GALLERY ADMIN ───────────────────────────────────────────────
+function addGalleryImg(){
+  var url     = document.getElementById('gp-url').value.trim();
+  var caption = document.getElementById('gp-caption').value.trim();
+  if(!url){ alert('Please enter an image URL.'); return; }
+  DATA.gallery.push({ id:nextId(), url:url, caption:caption });
+  document.getElementById('gp-url').value='';
+  document.getElementById('gp-caption').value='';
+  renderGallery(); renderAdminGallery();
+  document.getElementById('ov-gallery').textContent  = DATA.gallery.length;
+  document.getElementById('galleryCount').textContent = DATA.gallery.length;
+  showOK('gallerySuccess');
+}
+function renderAdminGallery(){
+  document.getElementById('apGalleryGrid').innerHTML = DATA.gallery.map(function(g){
+    return '<div style="position:relative;">' +
+      '<img src="'+g.url+'" alt="'+g.caption+'" style="width:88px;height:88px;object-fit:cover;border-radius:10px;border:1px solid var(--hairline-soft);">' +
+      '<button onclick="deleteGallery('+g.id+')" style="position:absolute;top:2px;right:2px;width:22px;height:22px;border-radius:50%;background:rgba(10,19,23,.75);color:#fff;border:none;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>' +
+      '</div>';
+  }).join('');
+}
+function deleteGallery(id){
+  if(!confirm('Remove this image?')) return;
+  DATA.gallery = DATA.gallery.filter(function(g){ return g.id!==id; });
+  renderGallery(); renderAdminGallery();
+  document.getElementById('ov-gallery').textContent  = DATA.gallery.length;
+  document.getElementById('galleryCount').textContent = DATA.gallery.length;
+}
+
+// ── FAQ ADMIN ───────────────────────────────────────────────────
+function addFAQ(){
+  var q = document.getElementById('fq-q').value.trim();
+  var a = document.getElementById('fq-a').value.trim();
+  if(!q||!a){ alert('Please fill in both question and answer.'); return; }
+  DATA.faq.push({ id:nextId(), q:q, a:a });
+  document.getElementById('fq-q').value='';
+  document.getElementById('fq-a').value='';
+  renderFAQ(); renderAdminFAQ();
+  document.getElementById('ov-faq').textContent = DATA.faq.length;
+  showOK('faqSuccess');
+}
+function renderAdminFAQ(){
+  document.getElementById('faqTableBody').innerHTML = DATA.faq.map(function(f){
+    return '<tr><td>'+f.q+'</td><td><button class="ap-del" onclick="deleteFAQ('+f.id+')">🗑</button></td></tr>';
+  }).join('');
+}
+function deleteFAQ(id){
+  if(!confirm('Delete this FAQ?')) return;
+  DATA.faq = DATA.faq.filter(function(f){ return f.id!==id; });
+  renderFAQ(); renderAdminFAQ();
+  document.getElementById('ov-faq').textContent = DATA.faq.length;
+}
+
+// ── CONTACT ─────────────────────────────────────────────────────
+function saveContact(){
+  var name  = document.getElementById('ci-name').value;
+  var phone = document.getElementById('ci-phone').value;
+  var email = document.getElementById('ci-email').value;
+  var addr  = document.getElementById('ci-addr').value;
+  document.getElementById('footerName').textContent  = name.split(' ')[0];
+  document.getElementById('footerPhone').textContent = phone;
+  document.getElementById('footerPhone').href        = 'tel:'+phone.replace(/\s/g,'');
+  document.getElementById('footerEmail').textContent = email;
+  document.getElementById('footerEmail').href        = 'mailto:'+email;
+  document.getElementById('footerAddr').textContent  = addr;
+  document.getElementById('campusAddr').textContent  = addr;
+  showOK('contactSuccess');
+}
+
+// ── BANNER ──────────────────────────────────────────────────────
+function saveBanner(){
+  var text = document.getElementById('si-banner').value;
+  var link = document.getElementById('si-bannerLink').value;
+  document.getElementById('promoBanner').innerHTML =
+    '<span>'+text+'</span>' +
+    '<a href="#enquiry">'+link+'</a>' +
+    '<button class="close-banner" onclick="this.parentElement.style.display=\'none\'">×</button>';
+  document.getElementById('promoBanner').style.display='flex';
+  showOK('bannerSuccess');
+}
+
+// ── CHANGE PASSWORD ─────────────────────────────────────────────
+function changePass(){
+  var u = document.getElementById('si-user').value.trim();
+  var p = document.getElementById('si-pass').value;
+  if(u) DATA.admin.user = u;
+  if(p) DATA.admin.pass = p;
+  document.getElementById('si-user').value='';
+  document.getElementById('si-pass').value='';
+  showOK('passSuccess');
+}
+</script>
+</body>
+</html>
